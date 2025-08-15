@@ -1,0 +1,7 @@
+{
+  "name": "basic-dev-container",
+  "image": "ubuntu:22.04",
+  "features": {},
+  "postCreateCommand": "apt-get update && apt-get install -y curl git",
+  "remoteUser": "root"
+}
