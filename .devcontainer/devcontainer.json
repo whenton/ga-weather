@@ -1,7 +1,25 @@
 {
-  "name": "basic-dev-container",
-  "image": "ubuntu:22.04",
-  "features": {},
-  "postCreateCommand": "apt-get update && apt-get install -y curl git",
-  "remoteUser": "root"
+  "name": "basic-dev-container",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.12"
+    }
+  },
+  "postCreateCommand": "python3 -m venv venv && source venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt && echo 'source /workspaces/ga-weather/.devcontainer/activate-env.sh' >> ~/.bashrc",
+  "remoteUser": "vscode",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "./venv/bin/python",
+        "python.terminal.activateEnvironment": true
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.flake8",
+        "ms-python.isort"
+      ]
+    }
+  },
+  "forwardPorts": [8000]
 }
